@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\RolesController;
-use App\Http\Livewire\DirectBooking;
-use App\Http\Livewire\DirectCustomer;
 use App\Http\Livewire\DirectLeads;
+use App\Http\Livewire\DirectBooking;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Livewire\DirectCustomer;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UsersController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\RolesController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\AppointmentController;
 
 Route::get('services/{id}', [BookingController::class, 'index']);
 Route::get('booking/{id}', [BookingController::class, 'book'])->name('book');
@@ -22,7 +23,7 @@ Route::post('reserve', [BookingController::class, 'reserve'])->name('reserve');
 Route::get('confirm/book/{id}', [BookingController::class, 'confirmPage'])->name('confirm.book');
 
 
-Auth::routes(['verify' => true, 'register' => false]);
+Auth::routes(['verify' => true, 'register' => false, 'logout' => false]);
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
